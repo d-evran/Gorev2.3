@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Soru 3</title>
+    <style>
+      #container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body onload="rastgeleSayi()">
+    <div id="container">
+      <form onsubmit="return tahminYap(event)">
+        <label for="tahmin">
+          <span id="labelTahmin"></span>. tahmini girin:
+        </label>
+        <input type="number" name="tahmin" id="tahmin" /><br />
+        <input type="submit" value="Tahmin Yap">
+        <hr />
+        <label id="yorum"></label>
+        <label id="sonuc"></label>
+      </form>
+    </div>
+
+    <script>
+      var rastgeleSayi;
+      function rastgeleSayi() {
+        rastgeleSayi = Math.round(Math.random() * (100 - 1)) + 1;
+        document.getElementById("labelTahmin").innerHTML = "1";
+      }
+      function tahminYap(e) {
+        e.preventDefault();
+        
+        const tahmin = Number(document.getElementById("tahmin").value);
+        const yorum = document.getElementById("yorum");
+        const sonuc = document.getElementById("sonuc");
+        let sayac = Number(document.getElementById("labelTahmin").innerHTML);
+        if (sayac < 7) {
+          if (rastgeleSayi > tahmin) {
+            yorum.innerHTML = "Daha büyük bir sayı girin.";
+            sayac++;
+          } else if (rastgeleSayi < tahmin) {
+            yorum.innerHTML = "Daha kücük bir sayı girin.";
+            sayac++;
+          } else {
+            yorum.innerHTML = "";
+            sonuc.innerHTML = "Sayi " + sayac + " denemede bulundu.";
+          }
+        } else {
+          yorum.innerHTML = "";
+          sonuc.innerHTML = "Deneme hakkınız kalmadı. Kaybettiniz.";
+        }
+        document.getElementById("labelTahmin").innerHTML = sayac;
+      }
+    </script>
+  </body>
+</html>
